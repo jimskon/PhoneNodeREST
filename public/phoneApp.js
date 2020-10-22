@@ -1,7 +1,7 @@
 // JavaScript for Phone Application Demo Program Using Express and REST
-// Jim Skon, Kenyon College, 202o
-const port='8081' // Must match port used on server, port>8000
-const Url='http://192.168.86.48:'+port
+// Jim Skon, Kenyon College, 2020
+const port='9002' // Must match port used on server, port>8000
+const Url='http://jimskon.com:'+port
 var operation;	// operation
 var selectid;
 var recIndex

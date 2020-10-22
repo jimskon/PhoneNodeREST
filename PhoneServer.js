@@ -15,9 +15,9 @@ function openSQL() {
     // Login to MySQL                                                                                                       
     var con = mysql.createConnection({
 	host: "localhost",
-	user: "skon",
-	password: "PhilanderChase707",
-	database: "PhoneDB"
+	user: "test",
+	password: "KenyonTest2020",
+	database: "test"
     });
     con.connect(function(err) {
         if (err) throw err;
@@ -129,7 +129,7 @@ app.get('/:id', function (req, res) {
     }
 })
 
-var server = app.listen(8081, function () {
+var server = app.listen(9002, function () {
    var host = server.address().address
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)
