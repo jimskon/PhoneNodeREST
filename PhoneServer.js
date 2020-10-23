@@ -4,7 +4,8 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 var mysql = require('mysql');
-
+// set to your port
+var port = 9002
 app.use(express.static('public'));
 //Serve up web page as the default
 app.get('/', function (req, res) {
@@ -129,7 +130,7 @@ app.get('/:id', function (req, res) {
     }
 })
 
-var server = app.listen(9002, function () {
+var server = app.listen(port, function () {
    var host = server.address().address
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)
