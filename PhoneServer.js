@@ -13,17 +13,17 @@ app.get('/', function (req, res) {
 })
 
 function openSQL() {
-    // Login to MySQL                                                                                                       
+    // Login to MySQL
     var con = mysql.createConnection({
-	host: "localhost",
-	user: "test",
-	password: "KenyonTest2020",
-	database: "test"
-    });
-    con.connect(function(err) {
-        if (err) throw err;
-    });
-    return con;
+    	host: "localhost",
+    	user: "test",
+    	password: "KenyonTest2020",
+    	database: "test"
+        });
+        con.connect(function(err) {
+            if (err) throw err;
+        });
+        return con;
 }
 
 var con = openSQL();
@@ -32,9 +32,9 @@ app.get('/list', function (req, res) {
     // Get a list of all records
     query = "SELECT * FROM PhoneBook";
     con.query(query, function(err,result,fields) {
-	if (err) throw err;
-	console.log(result)
-	res.end( JSON.stringify(result));
+	     if (err) throw err;
+	     console.log(result)
+	     res.end( JSON.stringify(result));
     })
 })
 
@@ -42,13 +42,13 @@ app.get('/find', function (req, res) {
     // find record(s) by name last
     console.log("Query:"+JSON.stringify(req.query));
     if (req.query.field === undefined || req.query.search === undefined) {
-	console.log("Missing query value!");
-	res.end('[]');
+    	console.log("Missing query value!");
+    	res.end('[]');
     } else {
-	field=req.query.field;
-	search=req.query.search;
-	console.log(field+":"+search);
-	
+    	field=req.query.field;
+    	search=req.query.search;
+    	console.log(field+":"+search);
+
 	query = "SELECT * FROM PhoneBook WHERE "+field + "  like '%"+req.query.search+"%'";
 	console.log(query);
 	con.query(query, function(err,result,fields) {
@@ -100,8 +100,8 @@ app.delete('/delete', function (req, res) {
     console.log("Params:"+JSON.stringify(req.query));
     recid=req.query.ID;
     if (recid === undefined || isNaN(recid)) {
-	console.log("Not a value record id to delete!");
-	res.end("['failure']");
+    	console.log("Not a value record id to delete!");
+    	res.end("['failure']");
     } else {
 	query = "DELETE FROM PhoneBook WHERE ID='"+recid+"'";
         console.log(query);
@@ -117,15 +117,15 @@ app.delete('/delete', function (req, res) {
 app.get('/:id', function (req, res) {
     // Get a record by id
     if (isNaN(req.params.id)) {
-	console.log("Bad id lookup: "+req.params.id);
-	res.end('[]');
+    	console.log("Bad id lookup: "+req.params.id);
+    	res.end('[]');
     } else {
-	query = "SELECT * FROM PhoneBook WHERE ID = "+ req.params.id;
-	console.log(query);
-	con.query(query, function(err,result,fields) {
-	    if (err) throw err;
-	    console.log(result)
-	    res.end( JSON.stringify(result));
+    	query = "SELECT * FROM PhoneBook WHERE ID = "+ req.params.id;
+    	console.log(query);
+    	con.query(query, function(err,result,fields) {
+    	    if (err) throw err;
+    	    console.log(result)
+    	    res.end( JSON.stringify(result));
 	})
     }
 })
@@ -135,4 +135,3 @@ var server = app.listen(port, function () {
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)
 })
-

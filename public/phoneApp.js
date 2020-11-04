@@ -20,7 +20,7 @@ $(document).ready(function () {
     $("#search").keyup(function(e){
 	getMatches();
     });
-    $("#add-btn").click(addEntry);    
+    $("#add-btn").click(addEntry);
     $("#clear").click(clearResults);
 
     //Handle pulldown menu
@@ -32,7 +32,7 @@ $(document).ready(function () {
     });
 
     $('.completeDelete').click(processDelete);
-    
+
 });
 
 // This processes the results from the server after we have sent it a lookup request.
@@ -47,7 +47,7 @@ function processResults(results) {
     $('#searchresults').append(buildTable(results));
     $(".edit").click(processEdit);
     $(".delete").click(DeleteConfirm);
-    
+
 }
 changeOperation(operation);
 
@@ -66,7 +66,7 @@ function changeOperation(operation){
 	$('.inputdata').hide();
 	$('.results').show();
 	$('.searchbox').show();
-    }	 
+    }
 }
 
 // Build output table from comma delimited data list from the server (a list of phone entries)
@@ -84,7 +84,7 @@ function buildTable(data) {
 	    i++;
 	})
 	result += "</table>";
-	
+
 	return result;
     }
 }
@@ -102,7 +102,7 @@ function processEdit(){
     var row=$(this).parents("tr");
     //console.log("First name of record: "+ $(row).find('.first').text());
     selectid=$(this).attr('ID');
-    
+
     $('#editfirst').val( $(row).find('.first').text());
     $('#editlast').val( $(row).find('.last').text());
     $('#editphone').val( $(row).find('.phone').text());
@@ -145,7 +145,7 @@ function processAdd(results) {
     $('#modalMessage').text("Record added: "+saveRecord);
     $('#messageTitle').text("Record Added");
 }
-    
+
 // This is called when the user hits the "Add button" in the add screen.
 // It calls the server with the fields they entered.
 function addEntry(){
@@ -160,7 +160,7 @@ addtype').val()
         error: displayError
     })
 }
-	
+
 // This is called when the user clicks on a "Delete" button on a row matches from a search.
 // It puts up a modal asking the user to confirm if they really want to delete this record.  If they
 // hit "Delete record", the processDelete function is called to do the delete.
@@ -177,14 +177,14 @@ function DeleteConfirm() {
 function processDelete(){
     var id=$(this).attr('ID');
     $.ajax({
-	type: "DELETE",
-	url: Url+'/delete?ID='+selectid,
-	success: deleteComplete,
-	error: displayError
+    	type: "DELETE",
+	    url: Url+'/delete?ID='+selectid,
+	    success: deleteComplete,
+    	error: displayError
     })
 }
 
-// Process a completed delete 
+// Process a completed delete
 function deleteComplete(results) {
     console.log("Delete success:"+saveRecord);
     $('.editdata').hide();
@@ -204,19 +204,16 @@ function clearResults() {
 
 // Called when the user hits the "Search" button.
 // It sends a request to the server (operation,search string),
-// Where operation is one of (Last, First, Type) 
+// Where operation is one of (Last, First, Type)
 function getMatches(){
     $('.editdata').hide();
     var search = $('#search').val();
     $('#searchresults').empty();
     $.ajax({
-	url: Url+'/find?field='+operation+'&search='+search,
-	type:"GET",
-	success: processResults,
-	error: displayError
+	     url: Url+'/find?field='+operation+'&search='+search,
+	     type:"GET",
+	     success: processResults,
+	     error: displayError
     })
-	
+
 }
-
-
-	
