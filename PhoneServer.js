@@ -28,6 +28,8 @@ function openSQL() {
 
 var con = openSQL();
 
+// List all records
+// url/list
 app.get('/list', function (req, res) {
     // Get a list of all records
     query = "SELECT * FROM PhoneBook";
@@ -38,6 +40,8 @@ app.get('/list', function (req, res) {
     })
 })
 
+// Find a record by a field
+// url/find?field=Last&search=name
 app.get('/find', function (req, res) {
     // find record(s) by name last
     console.log("Query:"+JSON.stringify(req.query));
@@ -62,10 +66,12 @@ app.get('/find', function (req, res) {
 function missingField(p) {
     return (p.First === undefined || p.Last === undefined || p.Phone === undefined || p.Type === undefined);
 }
-
+// Update an existing record
+// url/update?ID=17&First=Joe&Last=Ritter&Phone=911&Type=Other
 app.get('/update', function (req, res) {
     // update a record by id
     if (missingField(req.query) || req.query.ID === undefined) {
+	console.log("Bad ID:",req.query.ID);
         console.log("Bad update request:"+JSON.stringify(req.query));
         res.end("['fail']");
     } else {
@@ -79,6 +85,8 @@ app.get('/update', function (req, res) {
     }
 })
 
+// Add a new record
+// url/addrec?First=Lord&Last=Kenyon&Phone=740-427-5000&Type=Family
 app.get('/addrec', function (req, res) {
     // update a record by id
     if (missingField(req.query)) {
@@ -94,11 +102,13 @@ app.get('/addrec', function (req, res) {
 	})
     }
 })
-
+// Delete a record given it's ID
+// url/delete?ID=45
 app.delete('/delete', function (req, res) {
     console.log("Delete!");
     console.log("Params:"+JSON.stringify(req.query));
     recid=req.query.ID;
+    console.log("Delete ID:.recid");
     if (recid === undefined || isNaN(recid)) {
     	console.log("Not a value record id to delete!");
     	res.end("['failure']");
@@ -114,6 +124,9 @@ app.delete('/delete', function (req, res) {
     }
 })
 
+
+// Lookup record by ID
+// url/17
 app.get('/:id', function (req, res) {
     // Get a record by id
     if (isNaN(req.params.id)) {
