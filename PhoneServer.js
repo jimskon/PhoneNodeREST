@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-var mysql = require('mysql');
+var mysql = require('mysql2');
 // set to your port
 var port = 9002
 app.use(express.static('public'));
