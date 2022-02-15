@@ -7,6 +7,11 @@ From the directory:
 
 `npm install express`
 
+Then the port number in PhoneServer.js ot another number between 9000-9020.
+
+Then run:
+`node PhoneServer.js`
+
 ## RESTful API
 ### List all records
 
