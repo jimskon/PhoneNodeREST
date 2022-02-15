@@ -5,7 +5,7 @@ From the directory:
 
 `npm install mysql2`
 
-`npm install socket.io`
+`npm install express`
 
 ## RESTful API
 ### List all records
