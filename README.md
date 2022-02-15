@@ -3,7 +3,7 @@ You must include the following modules on the server
 
 From the directory: 
 
-`npm install mysql`
+`npm install mysql2`
 
 `npm install socket.io`
 
